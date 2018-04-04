@@ -32,17 +32,28 @@ public class Dataframe {
 	}
 
 	public void displayAll() {
-		// TODO Auto-generated method stub
+		for(Datacolumn colonne : this.columns){
+			colonne.afficherColonne();
+		}
 		
 	}
 
 	public void displayFirstLines(int i) {
-		// TODO Auto-generated method stub
-		
+		if(i > this.columns.size()){
+			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
+		}
+		for(int index = 0; index < i; index++){
+			this.columns.get(index).afficherColonne();
+		}
 	}
 
 	public void displayLastLines(int i) {
-		// TODO Auto-generated method stub
+		if(i > this.columns.size()){
+			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
+		}
+		for(int index = 0; index < i; index++){
+			this.columns.get(this.columns.size() - index).afficherColonne();
+		}
 		
 	}
 	

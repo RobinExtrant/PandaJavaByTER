@@ -18,5 +18,13 @@ public class Datacolumn<E>{
 			}
 		}
 	}
+
+	public void afficherColonne() {
+		for(E cellule : this.datalines){
+			System.out.print(cellule + " ");
+		}
+		System.out.println();
+		
+	}
 	
 }
