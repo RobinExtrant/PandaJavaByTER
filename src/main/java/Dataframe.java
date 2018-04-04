@@ -43,7 +43,7 @@ public class Dataframe {
 	}
 
 	public void displayFirstLines(int i) {
-		if(i > this.columns.size()){
+		if(i > this.columns.size() || i < 0){
 			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
 		}
 		for(int index = 0; index < i; index++){
@@ -52,16 +52,27 @@ public class Dataframe {
 	}
 
 	public void displayLastLines(int i) {
-		if(i > this.columns.size()){
+		if(i > this.columns.size() || i < 0){
 			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
 		}
 		for(int index = 0; index < i; index++){
-			this.columns.get(this.columns.size() - index).afficherColonne();
+			this.columns.get(this.columns.size() -1 - index).afficherColonne();
 		}
 		
 	}
 	
 	public Dataframe selectFirstLines(int i) {
+		if(i > this.columns.size() || i < 0){
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		return null;
+	}
+	
+	public Dataframe selectLastLines(int i) {
+		return null;
+	}
+	
+	public Dataframe selectLines(int start, int end) {
 		return null;
 	}
 }
