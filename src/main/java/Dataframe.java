@@ -30,5 +30,20 @@ public class Dataframe {
 			}
 		}
 	}
+
+	public void displayAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void displayFirstLines(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void displayLastLines(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
