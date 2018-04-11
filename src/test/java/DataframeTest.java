@@ -55,11 +55,19 @@ public class DataframeTest {
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void test_Display_first_lines_wrong() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException {
+	public void test_Display_first_lines_wrong_with_index_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException {
 		Object[][] contenu = new Object[][]{{40,50,46},{"Hello", "Goodbye", "Thank you"}};
 		String [] labels = new String[]{"entiers", "string"};
 		Dataframe datatest = new Dataframe(contenu, labels);
 		datatest.displayFirstLines(4);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_Display_first_lines_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException {
+		Object[][] contenu = new Object[][]{{40,50,46},{"Hello", "Goodbye", "Thank you"}};
+		String [] labels = new String[]{"entiers", "string"};
+		Dataframe datatest = new Dataframe(contenu, labels);
+		datatest.displayFirstLines(-3);
 	}
 
 	@Test
@@ -71,10 +79,18 @@ public class DataframeTest {
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void test_Display_last_lines_wrong() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException {
+	public void test_Display_last_lines_wrong_with_index_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException {
 		Object[][] contenu = new Object[][]{{40,50,46},{"Hello", "Goodbye", "Thank you"}};
 		String [] labels = new String[]{"entiers", "string"};
 		Dataframe datatest = new Dataframe(contenu, labels);
 		datatest.displayLastLines(4);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_Display_last_lines_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException {
+		Object[][] contenu = new Object[][]{{40,50,46},{"Hello", "Goodbye", "Thank you"}};
+		String [] labels = new String[]{"entiers", "string"};
+		Dataframe datatest = new Dataframe(contenu, labels);
+		datatest.displayLastLines(-3);
 	}
 }
