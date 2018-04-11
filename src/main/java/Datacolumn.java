@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import main.java.exception.TooMuchTypeInOneColumnException;
 
 public class Datacolumn<E>{
-	
+
 	private ArrayList<E> datalines;
 	private String label;
 	
@@ -28,6 +28,14 @@ public class Datacolumn<E>{
 		}
 		System.out.println();
 		
+	}
+	
+	public ArrayList<E> getDatalines() {
+		return datalines;
+	}
+
+	public String getLabel() {
+		return label;
 	}
 	
 }
