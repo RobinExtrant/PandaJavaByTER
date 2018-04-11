@@ -94,8 +94,8 @@ public class Dataframe {
 				throw new UnequalColumnSizeException();
 			}
 		}
-		String[] labels = new String[this.columns.size()-i];
-		Object[][] result = new Object[this.columns.size()-i][this.columns.get(this.columns.size()-i).getDatalines().size()];
+		String[] labels = new String[i];
+		Object[][] result = new Object[i][this.columns.get(this.columns.size()-i).getDatalines().size()];
 		
 		for(int index = this.columns.size()-1; index >= this.columns.size()-i; index--){
 			labels[index] = this.columns.get(index).getLabel();
