@@ -139,4 +139,31 @@ public class Dataframe {
 			return null;
 		}
 	}
+	
+	public void showAverage(int i){
+		if(i > this.columns.size() || i < 0){
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		else{
+			System.out.println(this.columns.get(i).computeAverage());
+		}
+	}
+	
+	public void showMin(int i){
+		if(i > this.columns.size() || i < 0){
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		else{
+			System.out.println(this.columns.get(i).getMinimum());
+		}
+	}
+	
+	public void showMax(int i){
+		if(i > this.columns.size() || i < 0){
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		else{
+			System.out.println(this.columns.get(i).getMaximum());
+		}
+	}
 }

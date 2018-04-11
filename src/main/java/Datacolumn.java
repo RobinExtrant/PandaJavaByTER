@@ -37,5 +37,70 @@ public class Datacolumn<E>{
 	public String getLabel() {
 		return label;
 	}
+
+	public float computeAverage() {
+		float sum = 0;
+		switch (this.datalines.get(0).getClass().getName()){
+			case "java.lang.Integer":
+				for(int index = 0; index < this.datalines.size(); index++){
+					sum += (Integer) this.datalines.get(index);
+				}
+				break;
+			case "java.lang.Double":
+				for(int index = 0; index < this.datalines.size(); index++){
+					sum += (Double) this.datalines.get(index);
+				}
+				break;
+			default:
+				throw new IllegalArgumentException("Impossible d'effectuer une moyenne sur ce type de données.");
+		}
+		return sum/this.datalines.size();
+	}
+	
+	public Object getMaximum() {
+		switch (this.datalines.get(0).getClass().getName()){
+			case "java.lang.Integer":
+				Object max = (Integer) this.datalines.get(0);
+				for(int index = 1; index < this.datalines.size(); index++){
+					if((Integer) max < (Integer) this.datalines.get(index)){
+						max = (Integer) this.datalines.get(index);
+					}
+				}
+				return (Integer) max;
+			case "java.lang.Double":
+				max = (Double) this.datalines.get(0);
+				for(int index = 1; index < this.datalines.size(); index++){
+					if((Double) max < (Double) this.datalines.get(index)){
+						max = (Double) this.datalines.get(index);
+					}
+				}
+				return (Double) max;
+			default:
+				throw new IllegalArgumentException("Impossible de chercher un maximum sur ce type de données.");
+		}
+	}
+	
+	public Object getMinimum() {
+		switch (this.datalines.get(0).getClass().getName()){
+		case "java.lang.Integer":
+			Object min = (Integer) this.datalines.get(0);
+			for(int index = 1; index < this.datalines.size(); index++){
+				if((Integer) min > (Integer) this.datalines.get(index)){
+					min = (Integer) this.datalines.get(index);
+				}
+			}
+			return (Integer) min;
+		case "java.lang.Double":
+			min = (Double) this.datalines.get(0);
+			for(int index = 1; index < this.datalines.size(); index++){
+				if((Double) min > (Double) this.datalines.get(index)){
+					min = (Double) this.datalines.get(index);
+				}
+			}
+			return (Double) min;
+		default:
+			throw new IllegalArgumentException("Impossible de chercher un minimum sur ce type de données.");
+		}
+	}
 	
 }
