@@ -34,19 +34,19 @@ public class Dataframe {
 	}
 
 	public void displayAll() {
+		System.out.println(this.getAllLines());
+	}
+	
+	public String getAllLines() {
+		String result = new String();
 		for(Datacolumn colonne : this.columns){
-			colonne.afficherColonne();
+			result += colonne.afficherColonne();
 		}
-		
+		return result;
 	}
 
 	public void displayFirstLines(int i) {
-		if(i > this.columns.size() || i < 0){
-			throw new IndexOutOfBoundsException("Nombre d'Ã©lÃ©ments Ã  afficher trop grand (maximum = " + this.columns.size() + ").");
-		}
-		for(int index = 0; index < i; index++){
-			this.columns.get(index).afficherColonne();
-		}
+		System.out.println(this.getFirstLines(i));
 	}
 	
 	public String getFirstLines(int i) {
@@ -61,13 +61,7 @@ public class Dataframe {
 	}
 	
 	public void displayLastLines(int i) {
-		if(i > this.columns.size() || i < 0){
-			throw new IndexOutOfBoundsException("Nombre d'Ã©lÃ©ments Ã  afficher trop grand (maximum = " + this.columns.size() + ").");
-		}
-		for(int index = 0; index < i; index++){
-			this.columns.get(this.columns.size() -1 - index).afficherColonne();
-		}
-		
+		System.out.println(this.getLastLines(i));
 	}
 	
 	public String getLastLines(int i) {
@@ -86,7 +80,7 @@ public class Dataframe {
 	}
 	
 	public Dataframe selectLastLines(int i) throws UnequalColumnSizeException, UncorrectParameterOrderException {
-		return selectLines(this.columns.size()-i,i);
+		return selectLines(this.columns.size()-i,i+1);
 	}
 	
 	public Dataframe selectLines(int start, int end) throws UnequalColumnSizeException, UncorrectParameterOrderException {
@@ -102,16 +96,18 @@ public class Dataframe {
 			}
 		}
 		String[] labels = new String[this.columns.size()];
-		Object[][] result = new Object[end-start][this.columns.get(start).getDatalines().size()];
+		Object[][] result = new Object[this.columns.size()][end-start];
 		
 		for(int index = 0; index < this.columns.size(); index++){
 			labels[index] = this.columns.get(index).getLabel();
 		}
 		
+		int indexLineInResult = 0;
 		for(int index = start; index < end; index++){
 			for(int index2 = 0; index2 < this.columns.size(); index2++){
-				result[index][index2] = this.columns.get(index2).getDatalines().get(index);
+				result[index2][indexLineInResult] = this.columns.get(index2).getDatalines().get(index);
 			}
+			indexLineInResult++;
 		}
 		try {
 			return new Dataframe(result, labels);

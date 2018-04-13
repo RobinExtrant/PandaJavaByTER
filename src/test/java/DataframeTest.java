@@ -174,10 +174,12 @@ public class DataframeTest {
 	}
 	//For get average
 	@Test
-	public void test_get_average_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+	public void test_get_average_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
 		Dataframe datatest = createGoodDatasetForStat();
-		assertEquals("Calcul de la moyenne sur des entiers mauvais", datatest.getAverage(0),50,0.0001);
-		assertEquals("Calcul de la moyenne sur des doubles mauvais", datatest.getAverage(2),40.0,0.0001);
+		assertEquals("Calcul de la moyenne sur des entiers mauvais", 50, datatest.getAverage(0),0.0001);
+		assertEquals("Calcul de la moyenne sur des doubles mauvais", 40.0, datatest.getAverage(2),0.0001);
+		Dataframe test = datatest.selectLastLines(2);
+		assertEquals("Calcul de la moyenne sur des doubles mauvais", 55.0, test.getAverage(0),0.0001);
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
@@ -195,8 +197,8 @@ public class DataframeTest {
 	@Test
 	public void test_get_min_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
 		Dataframe datatest = createGoodDatasetForStat();
-		assertEquals("Calcul du minimum sur des entiers mauvais", datatest.getMin(0),40,0.0001);
-		assertEquals("Calcul du minimum sur des doubles mauvais", datatest.getMin(2),35.5,0.0001);
+		assertEquals("Calcul du minimum sur des entiers mauvais", 40, datatest.getMin(0),0.0001);
+		assertEquals("Calcul du minimum sur des doubles mauvais", 35.5, datatest.getMin(2),0.0001);
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
@@ -214,8 +216,8 @@ public class DataframeTest {
 	@Test
 	public void test_get_max_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
 		Dataframe datatest = createGoodDatasetForStat();
-		assertEquals("Calcul du maximum sur des entiers mauvais", datatest.getMax(0),60,0.0001);
-		assertEquals("Calcul du maximum sur des doubles mauvais", datatest.getMax(2),44.5,0.0001);
+		assertEquals("Calcul du maximum sur des entiers mauvais", 60, datatest.getMax(0),0.0001);
+		assertEquals("Calcul du maximum sur des doubles mauvais", 44.5, datatest.getMax(2),0.0001);
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
