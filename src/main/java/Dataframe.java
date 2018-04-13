@@ -59,63 +59,19 @@ public class Dataframe {
 		
 	}
 	
-	public Dataframe selectFirstLines(int i) throws UnequalColumnSizeException {
-		if(i > this.columns.size() || i < 0){
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		for(int index = 0; index < i; index++){
-			if(this.columns.get(index).getDatalines().size() != this.columns.get(0).getDatalines().size()){
-				throw new UnequalColumnSizeException();
-			}
-		}
-		String[] labels = new String[i];
-		Object[][] result = new Object[i][this.columns.get(0).getDatalines().size()];
-		
-		for(int index = 0; index < i; index++){
-			labels[index] = this.columns.get(index).getLabel();
-			for(int index2 = 0; index2 < this.columns.get(index).getDatalines().size(); index2++){
-				result[index][index2] = this.columns.get(index).getDatalines().get(index2);
-			}
-		}
-		try {
-			return new Dataframe(result, labels);
-		} catch (Exception e) {
-			System.err.println("Impossible de recréer un Dataframe à partir des " + i + " premières lignes");
-			return null;
-		}
+	public Dataframe selectFirstLines(int i) throws UnequalColumnSizeException, UncorrectParameterOrderException {
+		return selectLines(0,i);
 	}
 	
-	public Dataframe selectLastLines(int i) throws UnequalColumnSizeException {
-		if(i > this.columns.size() || i < 0){
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		for(int index = i; index < this.columns.size(); index++){
-			if(this.columns.get(index).getDatalines().size() != this.columns.get(0).getDatalines().size()){
-				throw new UnequalColumnSizeException();
-			}
-		}
-		String[] labels = new String[i];
-		Object[][] result = new Object[i][this.columns.get(this.columns.size()-i).getDatalines().size()];
-		
-		for(int index = this.columns.size()-1; index >= this.columns.size()-i; index--){
-			labels[index] = this.columns.get(index).getLabel();
-			for(int index2 = 0; index2 < this.columns.get(index).getDatalines().size(); index2++){
-				result[index][index2] = this.columns.get(index).getDatalines().get(index2);
-			}
-		}
-		try {
-			return new Dataframe(result, labels);
-		} catch (Exception e) {
-			System.err.println("Impossible de recréer un Dataframe à partir des " + i + " dernières lignes");
-			return null;
-		}
+	public Dataframe selectLastLines(int i) throws UnequalColumnSizeException, UncorrectParameterOrderException {
+		return selectLines(this.columns.size()-i,i);
 	}
 	
 	public Dataframe selectLines(int start, int end) throws UnequalColumnSizeException, UncorrectParameterOrderException {
 		if(start > this.columns.size() || start < 0 || end > this.columns.size() || end < 0){
 			throw new ArrayIndexOutOfBoundsException();
 		}
-		if(end < start){
+		if(end <= start){
 			throw new UncorrectParameterOrderException();
 		}
 		for(int index = start; index < end; index++){
@@ -126,10 +82,13 @@ public class Dataframe {
 		String[] labels = new String[end-start];
 		Object[][] result = new Object[end-start][this.columns.get(start).getDatalines().size()];
 		
-		for(int index = start; index > end; index--){
+		for(int index = 0; index < this.columns.size(); index++){
 			labels[index] = this.columns.get(index).getLabel();
-			for(int index2 = 0; index2 < this.columns.get(index).getDatalines().size(); index2++){
-				result[index][index2] = this.columns.get(index).getDatalines().get(index2);
+		}
+		
+		for(int index = start; index < end; index++){
+			for(int index2 = 0; index2 < this.columns.size(); index2++){
+				result[index][index2] = this.columns.get(index2).getDatalines().get(index);
 			}
 		}
 		try {

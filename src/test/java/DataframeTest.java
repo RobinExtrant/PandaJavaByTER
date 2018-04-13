@@ -92,38 +92,38 @@ public class DataframeTest {
 	
 	//For select firstline
 	@Test
-	public void test_Select_first_lines_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+	public void test_Select_first_lines_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
 		Dataframe datatest = createGoodDataset();
 		datatest.selectFirstLines(2);
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void test_Select_first_lines_wrong_with_index_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+	public void test_Select_first_lines_wrong_with_index_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
 		Dataframe datatest = createGoodDataset();
 		datatest.selectFirstLines(4);
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void test_Select_first_lines_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+	public void test_Select_first_lines_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
 		Dataframe datatest = createGoodDataset();
 		datatest.selectFirstLines(-3);
 	}
 	
 	//For select lastline
 	@Test
-	public void test_Select_last_lines_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+	public void test_Select_last_lines_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
 		Dataframe datatest = createGoodDataset();
 		datatest.selectLastLines(2);
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void test_Select_last_lines_wrong_with_index_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+	public void test_Select_last_lines_wrong_with_index_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
 		Dataframe datatest = createGoodDataset();
 		datatest.selectLastLines(4);
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void test_Select_last_lines_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+	public void test_Select_last_lines_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
 		Dataframe datatest = createGoodDataset();
 		datatest.selectLastLines(-3);
 	}
