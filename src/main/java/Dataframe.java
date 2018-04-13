@@ -121,7 +121,7 @@ public class Dataframe {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 		else{
-			return (Double) this.columns.get(i).getMinimum();
+			return this.columns.get(i).getMinimum();
 		}
 	}
 	
