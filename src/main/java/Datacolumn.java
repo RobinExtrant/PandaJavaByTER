@@ -57,47 +57,47 @@ public class Datacolumn<E>{
 		return sum/this.datalines.size();
 	}
 	
-	public Object getMaximum() {
+	public Double getMaximum() {
 		switch (this.datalines.get(0).getClass().getName()){
 			case "java.lang.Integer":
-				Object max = (Integer) this.datalines.get(0);
+				Integer maxI = (Integer) this.datalines.get(0);
 				for(int index = 1; index < this.datalines.size(); index++){
-					if((Integer) max < (Integer) this.datalines.get(index)){
-						max = (Integer) this.datalines.get(index);
+					if((Integer) maxI < (Integer) this.datalines.get(index)){
+						maxI = (Integer) this.datalines.get(index);
 					}
 				}
-				return (Integer) max;
+				return maxI * 1.0;
 			case "java.lang.Double":
-				max = (Double) this.datalines.get(0);
+				Double maxD = (Double) this.datalines.get(0);
 				for(int index = 1; index < this.datalines.size(); index++){
-					if((Double) max < (Double) this.datalines.get(index)){
-						max = (Double) this.datalines.get(index);
+					if((Double) maxD < (Double) this.datalines.get(index)){
+						maxD = (Double) this.datalines.get(index);
 					}
 				}
-				return (Double) max;
+				return maxD;
 			default:
 				throw new IllegalArgumentException("Impossible de chercher un maximum sur ce type de données.");
 		}
 	}
 	
-	public Object getMinimum() {
+	public Double getMinimum() {
 		switch (this.datalines.get(0).getClass().getName()){
 		case "java.lang.Integer":
-			Object min = (Integer) this.datalines.get(0);
+			Integer minI = (Integer) this.datalines.get(0);
 			for(int index = 1; index < this.datalines.size(); index++){
-				if((Integer) min > (Integer) this.datalines.get(index)){
-					min = (Integer) this.datalines.get(index);
+				if((Integer) minI > (Integer) this.datalines.get(index)){
+					minI = (Integer) this.datalines.get(index);
 				}
 			}
-			return (Integer) min;
+			return minI * 1.0;
 		case "java.lang.Double":
-			min = (Double) this.datalines.get(0);
+			Double minD = (Double) this.datalines.get(0);
 			for(int index = 1; index < this.datalines.size(); index++){
-				if((Double) min > (Double) this.datalines.get(index)){
-					min = (Double) this.datalines.get(index);
+				if((Double) minD > (Double) this.datalines.get(index)){
+					minD = (Double) this.datalines.get(index);
 				}
 			}
-			return (Double) min;
+			return minD;
 		default:
 			throw new IllegalArgumentException("Impossible de chercher un minimum sur ce type de données.");
 		}
