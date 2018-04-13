@@ -39,14 +39,13 @@ public class DataframeTest {
 		Dataframe datatest = new Dataframe(contenu, labels);
 	}
 	
+	//For display all
 	private Dataframe createGoodDataset() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException {
 		Object[][] contenu = new Object[][]{{40,50,60},{"Hello", "Goodbye", "Thank you"}};
 		String [] labels = new String[]{"entiers", "string"};
 		Dataframe datatest = new Dataframe(contenu, labels);
 		return datatest;
 	}
-	
-	//For display all
 	@Test
 	public void test_Display_all() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException {
 		Dataframe datatest = createGoodDataset();
@@ -127,5 +126,107 @@ public class DataframeTest {
 	public void test_Select_last_lines_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
 		Dataframe datatest = createGoodDataset();
 		datatest.selectLastLines(-3);
+	}
+	
+	//For select lines
+	@Test
+	public void test_Select_lines_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
+		Dataframe datatest = createGoodDataset();
+		datatest.selectLines(1,2);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_Select_lines_wrong_with_firstIndex_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
+		Dataframe datatest = createGoodDataset();
+		datatest.selectLines(4,2);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_Select_lines_wrong_with_negative_firstIndex() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
+		Dataframe datatest = createGoodDataset();
+		datatest.selectLines(-1,2);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_Select_lines_wrong_with_secondIndex_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
+		Dataframe datatest = createGoodDataset();
+		datatest.selectLines(1,4);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_Select_lines_wrong_with_negative_secondIndex() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
+		Dataframe datatest = createGoodDataset();
+		datatest.selectLines(1,-1);
+	}
+	
+	@Test(expected = UncorrectParameterOrderException.class)
+	public void test_Select_lines_wrong_with_firstIndex_smaller_than_second_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException, UncorrectParameterOrderException {
+		Dataframe datatest = createGoodDataset();
+		datatest.selectLines(2,1);
+	}
+	
+	//For statistics
+	private Dataframe createGoodDatasetForStat() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException {
+		Object[][] contenu = new Object[][]{{40,50,60},{"Hello", "Goodbye", "Thank you"}, {35.5,40.0,44.5}};
+		String [] labels = new String[]{"entiers", "string", "double"};
+		Dataframe datatest = new Dataframe(contenu, labels);
+		return datatest;
+	}
+	//For get average
+	@Test
+	public void test_get_average_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+		Dataframe datatest = createGoodDatasetForStat();
+		assertEquals("Calcul de la moyenne sur des entiers mauvais", datatest.getAverage(0),50,0.0001);
+		assertEquals("Calcul de la moyenne sur des doubles mauvais", datatest.getAverage(2),40.0,0.0001);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_get_average_wrong_with_index_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+		Dataframe datatest = createGoodDatasetForStat();
+		datatest.getAverage(4);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_get_average_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+		Dataframe datatest = createGoodDatasetForStat();
+		datatest.getMin(-3);
+	}
+	//For get min
+	@Test
+	public void test_get_min_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+		Dataframe datatest = createGoodDatasetForStat();
+		assertEquals("Calcul du minimum sur des entiers mauvais", datatest.getMin(0),40,0.0001);
+		assertEquals("Calcul du minimum sur des doubles mauvais", datatest.getMin(2),35.5,0.0001);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_get_min_wrong_with_index_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+		Dataframe datatest = createGoodDatasetForStat();
+		datatest.getAverage(4);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test__get_min_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+		Dataframe datatest = createGoodDatasetForStat();
+		datatest.getMin(-3);
+	}
+	//For get max
+	@Test
+	public void test_get_max_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+		Dataframe datatest = createGoodDatasetForStat();
+		assertEquals("Calcul du maximum sur des entiers mauvais", datatest.getMax(0),60,0.0001);
+		assertEquals("Calcul du maximum sur des doubles mauvais", datatest.getMax(2),44.5,0.0001);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test_get_max_wrong_with_index_too_big() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+		Dataframe datatest = createGoodDatasetForStat();
+		datatest.getAverage(4);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void test__get_max_wrong_with_negative_index() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, UnequalColumnSizeException {
+		Dataframe datatest = createGoodDatasetForStat();
+		datatest.getMax(-3);
 	}
 }
