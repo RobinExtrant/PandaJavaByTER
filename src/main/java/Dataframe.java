@@ -28,7 +28,7 @@ public class Dataframe {
 					this.columns.add(new Datacolumn<Boolean>(contenu[index], labels[index]));
 					break;
 				default:
-					throw new UnknownTypeException("Type non reconnu lors de la création du dataframe.\nTypes supportés : Integer, String, Float, Boolean");
+					throw new UnknownTypeException("Type non reconnu lors de la crÃ©ation du dataframe.\nTypes supportÃ©s : Integer, String, Float, Boolean");
 			}
 		}
 	}
@@ -42,7 +42,7 @@ public class Dataframe {
 
 	public void displayFirstLines(int i) {
 		if(i > this.columns.size() || i < 0){
-			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
+			throw new IndexOutOfBoundsException("Nombre d'Ã©lÃ©ments Ã  afficher trop grand (maximum = " + this.columns.size() + ").");
 		}
 		for(int index = 0; index < i; index++){
 			this.columns.get(index).afficherColonne();
@@ -51,7 +51,7 @@ public class Dataframe {
 	
 	public String getFirstLines(int i) {
 		if(i > this.columns.size() || i < 0){
-			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
+			throw new IndexOutOfBoundsException("Nombre d'Ã©lÃ©ments Ã  afficher trop grand (maximum = " + this.columns.size() + ").");
 		}
 		String result = new String();
 		for(int index = 0; index < i; index++){
@@ -62,7 +62,7 @@ public class Dataframe {
 	
 	public void displayLastLines(int i) {
 		if(i > this.columns.size() || i < 0){
-			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
+			throw new IndexOutOfBoundsException("Nombre d'Ã©lÃ©ments Ã  afficher trop grand (maximum = " + this.columns.size() + ").");
 		}
 		for(int index = 0; index < i; index++){
 			this.columns.get(this.columns.size() -1 - index).afficherColonne();
@@ -72,7 +72,7 @@ public class Dataframe {
 	
 	public String getLastLines(int i) {
 		if(i > this.columns.size() || i < 0){
-			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
+			throw new IndexOutOfBoundsException("Nombre d'Ã©lÃ©ments Ã  afficher trop grand (maximum = " + this.columns.size() + ").");
 		}
 		String result = new String();
 		for(int index = 0; index < i; index++){
@@ -101,7 +101,7 @@ public class Dataframe {
 				throw new UnequalColumnSizeException();
 			}
 		}
-		String[] labels = new String[end-start];
+		String[] labels = new String[this.columns.size()];
 		Object[][] result = new Object[end-start][this.columns.get(start).getDatalines().size()];
 		
 		for(int index = 0; index < this.columns.size(); index++){
@@ -116,7 +116,7 @@ public class Dataframe {
 		try {
 			return new Dataframe(result, labels);
 		} catch (Exception e) {
-			System.err.println("Impossible de recréer un Dataframe à partir des " + start + " à " + end + " lignes");
+			System.err.println("Impossible de recrÃ©er un Dataframe Ã  partir des " + start + " Ã  " + end + " lignes");
 			return null;
 		}
 	}
