@@ -31,6 +31,16 @@ public class Datacolumn<E>{
 		return result;
 	}
 	
+	public String afficherColonne(int start, int end) {
+		String result = new String();
+		result += this.label + ": ";
+		for (int indexLine = start; indexLine < end; indexLine++) {
+			result += this.datalines.get(indexLine) + " ";
+		}
+		result+= "\n";
+		return result;
+	}
+	
 	public ArrayList<E> getDatalines() {
 		return datalines;
 	}

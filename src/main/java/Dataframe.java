@@ -50,12 +50,12 @@ public class Dataframe {
 	}
 	
 	public String getFirstLines(int i) {
-		if(i > this.columns.size() || i < 0){
+		if(i > this.columns.get(0).getDatalines().size() || i < 0){
 			throw new IndexOutOfBoundsException("Nombre d'Ã©lÃ©ments Ã  afficher trop grand (maximum = " + this.columns.size() + ").");
 		}
 		String result = new String();
-		for(int index = 0; index < i; index++){
-			result += this.columns.get(index).afficherColonne();
+		for (Datacolumn column : this.columns) {
+			result += column.afficherColonne(0, i);
 		}
 		return result;
 	}
@@ -65,12 +65,12 @@ public class Dataframe {
 	}
 	
 	public String getLastLines(int i) {
-		if(i > this.columns.size() || i < 0){
+		if(i > this.columns.get(0).getDatalines().size() || i < 0){
 			throw new IndexOutOfBoundsException("Nombre d'Ã©lÃ©ments Ã  afficher trop grand (maximum = " + this.columns.size() + ").");
 		}
 		String result = new String();
-		for(int index = 0; index < i; index++){
-			result += this.columns.get(this.columns.size() -1 - index).afficherColonne();
+		for (Datacolumn column : this.columns) {
+			result += column.afficherColonne(this.columns.get(0).getDatalines().size()-i, this.columns.get(0).getDatalines().size());
 		}
 		return result;
 	}
@@ -80,21 +80,24 @@ public class Dataframe {
 	}
 	
 	public Dataframe selectLastLines(int i) throws UnequalColumnSizeException, UncorrectParameterOrderException {
-		return selectLines(this.columns.size()-i,i+1);
+		return selectLines(this.columns.get(0).getDatalines().size()-i,this.columns.get(0).getDatalines().size());
 	}
 	
 	public Dataframe selectLines(int start, int end) throws UnequalColumnSizeException, UncorrectParameterOrderException {
-		if(start > this.columns.size() || start < 0 || end > this.columns.size() || end < 0){
-			throw new ArrayIndexOutOfBoundsException();
+		for (Datacolumn column : this.columns) {
+			if(start > column.getDatalines().size() || start < 0 || end > column.getDatalines().size() || end < 0){
+				throw new ArrayIndexOutOfBoundsException();
+			}
 		}
 		if(end <= start){
 			throw new UncorrectParameterOrderException();
 		}
+		/*
 		for(int index = start; index < end; index++){
 			if(this.columns.get(index).getDatalines().size() != this.columns.get(0).getDatalines().size()){
 				throw new UnequalColumnSizeException();
 			}
-		}
+		}*/
 		String[] labels = new String[this.columns.size()];
 		Object[][] result = new Object[this.columns.size()][end-start];
 		
