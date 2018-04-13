@@ -48,7 +48,18 @@ public class Dataframe {
 			this.columns.get(index).afficherColonne();
 		}
 	}
-
+	
+	public String getFirstLines(int i) {
+		if(i > this.columns.size() || i < 0){
+			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
+		}
+		String result = new String();
+		for(int index = 0; index < i; index++){
+			result += this.columns.get(index).afficherColonne();
+		}
+		return result;
+	}
+	
 	public void displayLastLines(int i) {
 		if(i > this.columns.size() || i < 0){
 			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
@@ -57,6 +68,17 @@ public class Dataframe {
 			this.columns.get(this.columns.size() -1 - index).afficherColonne();
 		}
 		
+	}
+	
+	public String getLastLines(int i) {
+		if(i > this.columns.size() || i < 0){
+			throw new IndexOutOfBoundsException("Nombre d'éléments à afficher trop grand (maximum = " + this.columns.size() + ").");
+		}
+		String result = new String();
+		for(int index = 0; index < i; index++){
+			result += this.columns.get(this.columns.size() -1 - index).afficherColonne();
+		}
+		return result;
 	}
 	
 	public Dataframe selectFirstLines(int i) throws UnequalColumnSizeException, UncorrectParameterOrderException {

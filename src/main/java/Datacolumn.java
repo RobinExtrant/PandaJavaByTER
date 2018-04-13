@@ -21,13 +21,14 @@ public class Datacolumn<E>{
 		}
 	}
 
-	public void afficherColonne() {
-		System.out.print(this.label + ": ");
+	public String afficherColonne() {
+		String result = new String();
+		result += this.label + ": ";
 		for(E cellule : this.datalines){
-			System.out.print(cellule + " ");
+			result += cellule + " ";
 		}
-		System.out.println();
-		
+		result+= "\n";
+		return result;
 	}
 	
 	public ArrayList<E> getDatalines() {
