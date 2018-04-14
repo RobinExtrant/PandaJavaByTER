@@ -1,8 +1,9 @@
 package Utils;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import com.opencsv.CSVReader;
@@ -11,15 +12,15 @@ import main.java.exception.UnknownTypeException;
 
 public class CSVToDataFrame {
 
-	public String[][] readCSV() throws IOException{
+	public String[][] readCSV(String path, String file) throws IOException{
 		//lire fichier CSV
-		final String RESOURCES_PATH = "/home/z/zhaot/git/PandaJavaByTER/";
-	    final String FILE_NAME = "fichier.csv";
-	    final char SEPARATOR = ';';
-		File file = new File(RESOURCES_PATH + FILE_NAME );
-		FileReader fr = new FileReader(file);
-		CSVReader csvreader = new CSVReader(fr,SEPARATOR);
-		
+		//final String RESOURCES_PATH = "/home/z/zhaot/git/PandaJavaByTER/";
+	    final String FILE_NAME = path+file;
+	    //final char SEPARATOR = ';';
+		//File file = new File(RESOURCES_PATH + FILE_NAME );
+		//FileReader fr = new FileReader(file);
+		Reader reader = Files.newBufferedReader(Paths.get(FILE_NAME));
+        CSVReader csvreader = new CSVReader(reader);
 		
 //		[0][0] : Prenom
 //		[1][0] --->> [0][1] : manu  
@@ -39,13 +40,13 @@ public class CSVToDataFrame {
 			}
 		}
 		// test columns
-		System.out.println("**************");
+		//System.out.println("**************");
 		for(int i=0; i<columns.length;i++){
 			for(int j=0; j<columns[0].length;j++){	
 				System.out.println(columns[i][j]);
 			}
 		}
-	
+		csvreader.close();
 		return columns;
 		
 	}
