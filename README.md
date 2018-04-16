@@ -5,7 +5,7 @@ Pour la couverture :
 
 Répartition du travail:
 - Emmanuel : Implémentation de la classe Dataframe + méthodes sur les données d'un dataframe.
-- Robin : Mise en place automatisation des tests + couverture du code. Implémentation des tests.
+- Robin : Mise en place automatisation des tests (Maven) + couverture du code (Travis). Implémentation des tests.
 - Tuo : Implémentation de la classe CSVToDataFrame permettant de lire les données d'un fichier csv.
 
 Fonctionnalités implémentées :
