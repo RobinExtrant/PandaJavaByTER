@@ -1,11 +1,8 @@
 # PandaJavaByTER
-Pour la couverture :
-    - selectFirstLines et selectLastLines:
-        Le dernier catch de n'a pas besoin d'être testé car le dataframe sur lequel on appelle la méthode a forcément été créé correctement (et aucune modification ne permet de le modifier), et on fait les vérifications nécessaires avant d'en créer un nouveau.
 
 Répartition du travail:
 - Emmanuel : Implémentation de la classe Dataframe + méthodes sur les données d'un dataframe.
-- Robin : Mise en place automatisation des tests (Maven) + couverture du code (Travis). Implémentation des tests.
+- Robin : Mise en place automatisation des tests (Maven) + couverture du code (EclEmma - JaCoCo) + intégration continue (Travis CI) + Implémentation des tests (JUnit).
 - Tuo : Implémentation de la classe CSVToDataFrame permettant de lire les données d'un fichier csv.
 
 Fonctionnalités implémentées :
@@ -19,3 +16,12 @@ Fonctionnalités implémentées :
 
 - Obtenir sous forme d'un Double le minimum de la i-ème colonne d'un dataframe (fonction getMin), le maximum de la i-ème colonne (fonction getMax), la moyenne de la i-ème colonne (fonction getAverage). Ces fonctions sont utilisables sur les colonnes contenant des Integer ou des Double.
 - Affichage des valeurs retournées par ces fonctions via les fonctions showMin, showMax, showAverage.
+
+Manipulation du projet :
+- Pour lancer les tests, il suffit de faire : 'mvn test'
+- La génération du rapport de couverture de code se fait à la phase "site" de maven. Pour générer le rapport, il suffit de faire  : 'mvn site' . Le rapport est alors généré sous forme de site html dans le dossier "./target/site/jacoco-ut/index.html"
+
+Pour la couverture du code :
+    - selectLines:
+        Le dernier catch de n'a pas besoin d'être testé car le dataframe sur lequel on appelle la méthode a forcément été créé correctement (et aucune modification ne permet de le modifier), et on fait les vérifications nécessaires avant d'en créer un nouveau.
+
