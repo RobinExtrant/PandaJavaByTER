@@ -1,5 +1,6 @@
 package main.java;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import main.java.exception.*;
@@ -158,4 +159,19 @@ public class Dataframe {
 			return (Double) this.columns.get(i).getMaximum();
 		}
 	}
+	
+	public static Dataframe readFromFile(String path, String file) throws IOException, UnknownTypeException, TooMuchTypeInOneColumnException, UnequalArraySizeException{
+		String[][] data = CSVToDataFrame.readCSV(path, file);
+		String[] labels = CSVToDataFrame.getLabels(data);
+		ArrayList<Object[]> typedDataList = new ArrayList<Object[]>();
+		for(String[] column : data){
+			typedDataList.add(CSVToDataFrame.getColumnWithRightType(column));
+		}
+		Object[][] typedData = new Object[typedDataList.size()][typedDataList.get(0).length];
+		for(int i =0; i < typedDataList.size(); i++){
+			typedData[i] = typedDataList.get(i);
+		}
+		return new Dataframe(typedData, labels);
+	}
+	
 }
