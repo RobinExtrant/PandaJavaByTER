@@ -1,6 +1,9 @@
 package test.java;
 
 import static org.junit.Assert.*;
+
+import java.io.IOException;
+
 import org.junit.*;
 import main.java.Dataframe;
 import main.java.exception.*;
@@ -51,6 +54,20 @@ public class DataframeTest {
 		Dataframe datatest = createGoodDataset();
 		datatest.displayAll();
 		assertEquals("entiers: 40 50 60 \nstring: Hello Goodbye Thank you \n", datatest.getAllLines());
+	}
+	
+	//For read from csv
+	@Test
+	public void test_reader_csv_good() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, IOException {
+		Dataframe datatest = Dataframe.readFromFile("./data/", "dataset_good.csv");
+		assertEquals("entiers: 40 50 60 \nstring: Hello Goodbye Thank you \ndoubles: 35.5 40.0 44.5 \n", datatest.getAllLines());
+		assertEquals("Problème dans le calcul d'une moyenne sur des entiers provenant d'un fichier csv", 50, datatest.getAverage(0), 0.0001);
+		assertEquals("Problème dans le calcul d'une moyenne sur des doubles provenant d'un fichier csv", 40.0, datatest.getAverage(2), 0.0001);
+	}
+	
+	@Test(expected = TooMuchTypeInOneColumnException.class)
+	public void test_reader_toomuch_type_in_one_column_wrong() throws TooMuchTypeInOneColumnException, UnknownTypeException, UnequalArraySizeException, IOException {
+		Dataframe datatest = Dataframe.readFromFile("./data/", "toomuchtype_dataset.csv");
 	}
 	
 	//For display first line

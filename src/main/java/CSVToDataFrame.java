@@ -46,7 +46,27 @@ public class CSVToDataFrame {
 	}
 	
 	public static Object[] getColumnWithRightType(String[] column) throws UnknownTypeException{
+
+		Object[] result = new Object[column.length-1];
 		
+		for (int j = 1; j < column.length; j++) {	
+			if(column[j].equals("true") || column[j].equals("false")){
+				result[j - 1] = Boolean.parseBoolean(column[j]);			
+			}else{		
+				try{
+					result[j - 1] = Integer.parseInt(column[j]);
+				}catch(Exception e2){
+					try{
+						result[j - 1] = Double.parseDouble(column[j]);
+					}catch(Exception e3){
+						result[j - 1] = column[j];
+					}
+				}
+			}
+			
+		}
+		return result;
+		/*
 		if(column[1].equals("true") || column[1].equals("false")){
 			Boolean[] result1 = new Boolean[column.length-1];
 			for (int j = 1; j < column.length; j++) {
@@ -55,6 +75,7 @@ public class CSVToDataFrame {
 			return result1;
 			
 		}else{
+			
 			try{
 				Integer[] result2 = new Integer[column.length-1];
 				for (int j = 1; j < column.length; j++) {
@@ -76,7 +97,7 @@ public class CSVToDataFrame {
 					return result4;
 					}
 			}
-		}
+		}*/
 	}
 	
 }
