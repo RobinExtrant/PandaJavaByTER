@@ -1,5 +1,10 @@
 # PandaJavaByTER
 
+Membres:
+- Robin EXTRANT
+- Emmanuel LIONET
+- Tuo ZHAO
+
 Répartition du travail:
 - Emmanuel : Implémentation de la classe Dataframe + méthodes sur les données d'un dataframe.
 - Robin : Mise en place automatisation des tests (Maven) + couverture du code (EclEmma - JaCoCo) + intégration continue (Travis CI) + Implémentation des tests (JUnit).
@@ -20,6 +25,9 @@ Fonctionnalités implémentées :
 Manipulation du projet :
 - Pour lancer les tests, il suffit de faire : 'mvn test'
 - La génération du rapport de couverture de code se fait à la phase "site" de maven. Pour générer le rapport, il suffit de faire  : 'mvn site' . Le rapport est alors généré sous forme de site html dans le dossier "./target/site/jacoco-ut/index.html"
+
+Feedback :
+- Dans l'ensemble nous n'avons pas eu de difficulté majeure pendant le projet. Cependant, il est très inconfortable de devoir convertir une librairie d'un language non typé (python) vers un language très typé (java). En effet, nous avons du utilisé des structures de type Object et de nombreux cast, à cause du fait qu'une structure de données en java (array, list...) ne peut avoir qu'un seul type. Il serait préférable, pour les prochains projets, d'essayer de ne pas devoir passer d'un language avec très peu de contraintes vers un language tel que le java (surtout dans le cadre du DevOps, ou nous pensons que le but premier du projet n'était pas l'implémentation en elle même de la librairie Pandas, mais l'utilisation des différents outils vus pendant le semestre).
 
 Pour la couverture du code :
     - selectLines:
